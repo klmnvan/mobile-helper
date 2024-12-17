@@ -85,14 +85,14 @@ class AuthViewModel: ViewModel() {
         //перебираем список фильмов, и в список, который выводим, добавляем нужные фильмы
         val filmPreview = mutableListOf<Film>()
         sortedFilms.forEach { filmCategory ->
-            filmPreview.add(stateValue.films.first { it.id == filmCategory.idFilm })
+            val film = stateValue.films.first { it.id == filmCategory.idFilm }
+            if(film.name.contains(stateValue.search, ignoreCase = true)) {
+                filmPreview.add(film)
+            }
         }
         stateValue = stateValue.copy(filmPreview = filmPreview)
         //stateValue = stateValue.copy(filmPreview = stateValue.filmPreview.filter { it.name.contains(stateValue.search, ignoreCase = true) }.toMutableList())
     }
-
-
-
 
 
 
